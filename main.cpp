@@ -53,59 +53,59 @@ Thing: Car Wash
  */
 
 /*
-Thing 1)
+Thing 1) Recording Studio
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) number of microphones
+    2) number of outboard units
+    3) amount of sessions per month
+    4) amount of discount for multiple day sessions
+    5) amount of revenew per month
 3 things it can do:
-    1)
-    2)
-    3)
+    1) record an album
+    2) charge sessions to client
+    3) test all equipment
  */
 
 /*
-Thing 2)
+Thing 2) Supermarket
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) number of employees per shift
+    2) number of active cashiers
+    3) amount of sales per day
+    4) amount of profit per day
+    5) list with best sold products
 3 things it can do:
-    1)
-    2)
-    3)
+    1) charge client for groceries
+    2) restock products
+    3) bake bread
  */
 
 /*
-Thing 3)
+Thing 3) Bakery
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) number of bags of flour
+    2) amount of bread per bread type
+    3) amount of cake per cake type
+    4) amount of sales per day
+    5) amount of products to deliver per establishment
 3 things it can do:
-    1)
-    2)
-    3)
+    1) bake cake
+    2) deliver bread
+    3) calculate food waste
  */
 
 /*
-Thing 4)
+Thing 4) Bar
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) number of products in stock per category
+    2) number of product to order per category
+    3) amount of profit per day
+    4) amount of products sold per day
+    5) specials (dishes) per day
 3 things it can do:
-    1)
-    2)
-    3)
+    1) serve drink
+    2) charge costumer
+    3) order new stock
  */
 
 
