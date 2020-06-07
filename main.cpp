@@ -108,17 +108,17 @@ Thing 4) Bar
  */
 
 /*
-Thing 10)
+Thing 10) Mixing Console
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) Master Section
+    2) Input Section
+    3) Output Section
+    4) EQ Section
+    5) Dynamics Section
 3 things it can do:
-    1)
-    2)
-    3)
+    1) mix signals together
+    2) process signals individually
+    3) choose which speakers to use
  */
 
 /*
