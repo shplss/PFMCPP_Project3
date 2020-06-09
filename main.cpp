@@ -129,73 +129,73 @@ Thing 4) Bar
  */
 
 /*
-Thing 5)
+Thing 5) Master Section
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) Master Fader Level in dB
+    2) Speaker Level in dB
+    3) Monitor Selection
+    4) Foldback Level in dB
+    5) Bus Compressor On/Off
 3 things it can do:
-    1)
-    2)
-    3)
+    1) select different set of speakers
+    2) change monitoring level
+    3) send audio to headphones
  */
 
 /*
-Thing 6)
+Thing 6) Input Section
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) Mic Gain Level in dB
+    2) Line Level in dB
+    3) Input Source
+    4) Meter Flip
+    5) HPF On/Off
 3 things it can do:
-    1)
-    2)
-    3)
+    1) amplify input signal
+    2) apply hpf on input
+    3) attenuate MTR return
  */
 
 /*
-Thing 7)
+Thing 7) Output Section
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) Matrix Output Channel
+    2) Mix Switch On/Off
+    3) Output Level
+    4) Channel Panning
+    5) Meter Flip
 3 things it can do:
-    1)
-    2)
-    3)
+    1) include singnal in subgroup
+    2) set channel output level
+    3) position signal in stereo field
  */
 
 /*
-Thing 8)
+Thing 8) EQ Section
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) High Shelf Frequency
+    2) High Shelf Gain
+    3) Parametric Frequency
+    4) Parametric Q
+    5) Parametric Gain
 3 things it can do:
-    1)
-    2)
-    3)
+    1) remove unwanted frequencies
+    2) increase presence in the signal
+    3) decrease low end boominess
  */
 
 /*
-Thing 9)
+Thing 9) Dynamics Section
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) Compressor Threshold
+    2) Compressor Ratio
+    3) Compressor Attack
+    4) Compressor Release
+    5) Compressor Engage Switch
 3 things it can do:
-    1)
-    2)
-    3)
+    1) limit signal to avoid clipping
+    2) make signal louder
+    3) tame signal transients
  */
 
 /*
