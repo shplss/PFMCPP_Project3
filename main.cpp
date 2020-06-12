@@ -28,6 +28,8 @@ Thing: Car Wash
 
 #include <iostream>
 #include <string>
+#include <math.h>       // included for comparison use
+
 namespace Part1eVersion 
 {
 struct CarWash        
@@ -108,9 +110,55 @@ struct CarWash
     You'll need to insert the Person struct from the video in the space below.
  */
 
+struct Person
+{
+    struct Foot
+    {
+        int numOfSteps = 0;
+        int stepSize_cm = 70; 
 
+        void stepForward();
+        int stepSize();
+    };
 
+    int age;
+    int height;
+    float hairLength;
+    float GPA;
+    unsigned int SATScore;
+    int distanceTraveled;
 
+    Foot leftFoot;
+    Foot rightFoot;
+
+    void run(int howFast, bool startWithLeftFoot);
+};
+
+void Person::Foot::stepForward()
+{
+    this->numOfSteps += 1;
+}
+
+int Person::Foot::stepSize()
+{
+    return this->stepSize_cm;
+}
+
+void Person::run(int howFast, bool startWithLeftFoot)
+{
+    if(startWithLeftFoot) 
+    {
+        leftFoot.stepForward();
+        rightFoot.stepForward();
+    }
+    else
+    {
+        rightFoot.stepForward();
+        leftFoot.stepForward();
+    }
+
+    distanceTraveled += leftFoot.stepSize() + rightFoot.stepSize();
+}
 
  /*
  2) provide implementations for the member functions you declared in your 10 user-defined types from the previous video outside of your UDT definitions.
@@ -121,70 +169,46 @@ struct CarWash
  4) After you finish defining each type/function, click the [run] button.  Clear up any errors or warnings as best you can.
  */
 
-
-
-
-
-/*
-Thing 1) Recording Studio
-5 properties:
-    1) number of microphones
-    2) number of outboard units
-    3) amount of sessions per month
-    4) amount of discount for multiple day sessions
-    5) amount of revenew per month
-3 things it can do:
-    1) record an album
-    2) charge sessions to client
-    3) test all equipment
- */
-
 struct RecStudio 
 {
-    // number of microphones
     int numMicrophones = 25;
-    // number of outboard units
     int numOutboardUnits = 30;
-    // amount of sessions per month
     int sessionPerMonth = 10;
-    // amount of discount for multiple day sessions
-    float multiDayDiscount = 20.0f;
-    // amount of revenew per month
+    float multiDayDiscount = 0.20f;
     float revenewPerMonth = 6000.0f;
 
-    // record an album
     void recordAlbum(int numMusicians, int genreCode, int amountTime);
-    // charge sessions to client
     float chargeSession(int hoursUsed, float discount, float extraCosts = 0.0f);
-    // test all equipment
     void testAllEquipment();
 };
 
-/*
-Thing 2) Supermarket
-5 properties:
-    1) number of employees per shift
-    2) number of active cashiers
-    3) amount of sales per day
-    4) amount of profit per day
-    5) list with best sold products
-3 things it can do:
-    1) charge client for groceries
-    2) restock products
-    3) bake bread
- */
+void RecStudio::recordAlbum(int numMusicians, int genreCode, int amountTime)
+{
+    // Price Preview + Booking
+}
+
+float RecStudio::chargeSession(int hoursUsed, float discount, float extraCosts)
+{
+    float hourlyPrice = 50.0f;          // Variable would be created elsewhere
+    float sessionPrice = 0.0f;
+
+    sessionPrice = hoursUsed * hourlyPrice + extraCosts;
+    sessionPrice -= sessionPrice * discount;
+
+    return sessionPrice;
+}
+
+void RecStudio::testAllEquipment()
+{
+    // Check all equipment available + test procedure
+}
 
 struct Supermarket 
 {
-    // number of employees per shift
     int employPerShift = 15;
-    // number of active cashiers
     int numActiveChashiers = 5;
-    // amount of sales per day
     float salesPerDay = 10000.0f;
-    // amount of profit per day
     float profitPerDay = 3000.0f;
-    // list with best sold products
     int topSellerID = 0;
 
     struct Product 
@@ -195,292 +219,314 @@ struct Supermarket
         int currentStock = 0;
         int orderedStock = 0;
 
-        // updates product price
         bool updatePrice(float newPrice);
-        // predicts needed stock based on previous sales
         int stockPrediction(int salesPeriodInMonths, int salesAmount, int currentStock);
-        // compares two prices and gives the difference
         float priceComparison(Product prodToCompareWith);
     };                       
 
-    // charge client for groceries
-    float chargeClient(float productTotal, float taxAmount = 21.0f, float discount = 0);
-    // restock products
+    float chargeClient(float productTotal, float taxAmount = 0.21f, float discount = 0);
     bool restockProducts(Product prod, int restockQuantity);
-    // bake bread
     void bakeBread(int breadType, int bakeQuantity);
 };
 
-/*
-Thing 3) Bakery
-5 properties:
-    1) number of bags of flour
-    2) amount of bread per bread type
-    3) amount of cake per cake type
-    4) amount of sales per day
-    5) amount of products to deliver per establishment
-3 things it can do:
-    1) bake cake
-    2) deliver bread
-    3) calculate food waste
- */
+bool Supermarket::Product::updatePrice(float newPrice)
+{
+    if(fabs(this->retailPrice - newPrice) < 0.005f)
+    {
+        this->retailPrice = newPrice;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+int Supermarket::Product::stockPrediction(int salesPeriodInMonths, int salesAmount, int curStock)
+{
+    int stockNeeded = 0;
+
+    // Prediction based on sales
+
+    return stockNeeded;
+}
+
+float Supermarket::Product::priceComparison(Supermarket::Product prodToCompareWith)
+{
+    float priceDiff = 0.0f;
+
+    priceDiff = this->retailPrice - prodToCompareWith.retailPrice;
+
+    return priceDiff;
+}
+
+float Supermarket::chargeClient(float productTotal, float taxAmount, float discount)
+{
+    float totalCharge = 0.0f;
+
+    totalCharge = productTotal + (productTotal * taxAmount);
+    totalCharge -= totalCharge * discount;
+
+    return totalCharge;
+}
+
+bool Supermarket::restockProducts(Supermarket::Product prod, int restockQuantity)
+{
+    // Method to contact supplier
+    bool contactSuccessful = true;              // Success simulation
+
+    if(contactSuccessful)
+    {
+        prod.orderedStock = restockQuantity;
+        return contactSuccessful;
+    }
+
+    return contactSuccessful;
+}
+
+void Supermarket::bakeBread(int breadType, int bakeQuantity)
+{
+    // Start baking method
+}
 
 struct Bakery
 {
-    // number of bags of flour
     int numBagsFlour = 20;
-    // amount of bread per bread type
     int XBread_Amount = 40;
-    // amount of cake per cake type
     int XCake_Amount = 5;
-    // amount of sales per day
     float daySales = 5000.0f;
-    // amount of products to deliver per establishment
-    int XCliente_totalProdDeliver = 5;
+    int XClient_totalProdDeliver = 5;
 
-    // bake cake
     void bakeCake(int cakeType, int bakeQuantity);
-    // deliver bread
     bool deliverBread(int clientID, int orderID, int deliveryTime);
-    // calculate food waste
     float foodWaste_Kg(int amountDays);
 };
 
-/*
-Thing 4) Bar
-5 properties:
-    1) number of products in stock per category
-    2) number of product to order per category
-    3) amount of profit per day
-    4) amount of products sold per day
-    5) specials (dishes) per day
-3 things it can do:
-    1) serve drink
-    2) charge costumer
-    3) order new stock
- */
+void Bakery::bakeCake(int cakeType, int bakeQuantity)
+{
+    // Start baking method
+}
+
+bool Bakery::deliverBread(int clientID, int orderID, int deliveryTime)
+{
+    // Start delivery method
+
+    return true;                                // Success simulation
+}
+
+float Bakery::foodWaste_Kg(int amountDays)
+{
+    float totalFoodWaste = 0.0f;
+
+    // Calculate food waste
+
+    return totalFoodWaste;
+}
 
 struct Bar 
 {
-    // number of products in stock per category
     int XCategory_numProdStock = 200;
-    // number of product to order per category
     int XCategory_numProdOrder = 50;
-    // amount of profit per day
     float dayProfit = 4000.0f;
-    // amount of products sold per day
     int prodSoldPerDay = 150;
-    // specials (dishes) per day
     int numDailySpecials = 3;
 
-    // serve drink
     bool serveDrink(int drinkID, int quantity = 1);
-    // charge costumer
-    float billClient(float productTotal, bool hasTabOpen = false, float taxAmount = 9.0f);
-    // order new stock
+    float billClient(float productTotal, bool hasTabOpen = false, float taxAmount = 0.09f);
     void orderNewStock(int productID, int quantityOrder);
 };
 
-/*
-Thing 5) Master Section
-5 properties:
-    1) Master Fader Level in dB
-    2) Speaker Level in dB
-    3) Monitor Selection
-    4) Foldback Level in dB
-    5) Bus Compressor On/Off
-3 things it can do:
-    1) select different set of speakers
-    2) change monitoring level
-    3) send audio to headphones
- */
+bool Bar::serveDrink(int drinkID, int quantity)
+{
+    bool drinkServed = true;                    // Success simulation
+
+    // check if drink is in stock, if yes serveDrink
+
+    return drinkServed;
+}
+
+float Bar::billClient(float productTotal, bool hasTabOpen, float taxAmount)
+{
+    float totalCharge = 0.0f;
+    float totalTab = 0.0f;                  // Variable would be created elsewhere
+
+    if(!hasTabOpen)
+    {
+        totalCharge = productTotal + (productTotal * taxAmount);  
+    }
+    else
+    {
+        totalCharge = productTotal + totalTab;
+        totalCharge += totalCharge * taxAmount;
+    }
+
+    return totalCharge;
+}
+
+void Bar::orderNewStock(int productID, int quantityOrder)
+{
+    // Method to order products
+}
 
 struct MasterSection
 {
-    // Master Fader Level in dB
     float masterFaderLevel = 0.0f;
-    // Speaker Level in dB
     float monitorLevel = -20.0f;
-    // Monitor Selection
     int monitorSelID = 0;
-    // Foldback Level in dB
     float foldbackLevel = -10.0f;
-    // Bus Compressor On/Off
     bool busCompressor = false;
 
-    // select different set of speakers
     void selectSpeaker(int monitorSelID);
-    // change monitoring level
     void changeLevel(float gainChange);
-    // send audio to headphones
     bool sendMasterToHP(float sendLevel = -20.0f);
 };
 
-/*
-Thing 6) Input Section
-5 properties:
-    1) Mic Gain Level in dB
-    2) Line Level in dB
-    3) Input Source
-    4) Meter Flip
-    5) HPF On/Off
-3 things it can do:
-    1) amplify input signal
-    2) apply hpf on input
-    3) attenuate MTR return
- */
+void MasterSection::selectSpeaker(int monitorID)
+{
+    // Change main speakers
+}
+
+void MasterSection::changeLevel(float gainChange)
+{
+    this->masterFaderLevel += gainChange;
+}
+
+bool MasterSection::sendMasterToHP(float sendLevel)
+{
+    // Send master fader to foldback
+
+    return true;                        // Success simulation
+}
 
 struct InputSection
 {
-    // Mic Gain Level in dB
     float micGain = -80.0f;
-    // Line Level in dB
     float lineGain = 0.0f;
-    // Input Source
     int inputSourceID = 0;
-    // Meter Flip
     bool meterFlip = false;
-    // HPF On/Off
     bool hpfEngage = false;
 
-    // amplify input signal
     void gainInput(float gainAmount);
-    // apply hpf on input
     void engageHPF(bool hpfEngage);
-    // attenuate MTR return
     void gainMtrRet(float gainAmount);
 };
 
-/*
-Thing 7) Output Section
-5 properties:
-    1) Matrix Output Channel
-    2) Mix Switch On/Off
-    3) Output Level
-    4) Channel Panning
-    5) Meter Flip
-3 things it can do:
-    1) include singnal in subgroup
-    2) set channel output level
-    3) position signal in stereo field
- */
+void InputSection::gainInput(float gainAmount)
+{
+    if(this->inputSourceID == 0)                // Would use a switch case instead
+    {
+        micGain += gainAmount;
+    }
+    else if(this->inputSourceID == 1)
+    {
+        lineGain += gainAmount;
+    }
+}
+
+void InputSection::engageHPF(bool hpfEng)
+{
+    this->hpfEngage = hpfEng;
+}
+
+void InputSection::gainMtrRet(float gainAmount)
+{
+    // Change gain on MTR Return
+}
 
 struct OutputSection
 {
-    // Matrix Output Channel
     int outputChannel = 0;
-    // Mix Switch On/Off
     bool addToMix = false;
-    // Output Level
     float channelFader = -80.0f;
-    // Channel Panning
     float channelPanning = 0.0f;
-    // Meter Flip
     bool meterFlip = false;
 
-    // include singnal in subgroup
     void sendToSubgroup(int subgroupID);
-    // set channel output level
     void setChannelLevel(int channelID, float channelFader);
-    // position signal in stereo field
     void changePanning(int channelID, float channelPanning);
 };
 
-/*
-Thing 8) EQ Section
-5 properties:
-    1) High Shelf Frequency
-    2) High Shelf Gain
-    3) Parametric Frequency
-    4) Parametric Q
-    5) Parametric Gain
-3 things it can do:
-    1) remove unwanted frequencies
-    2) increase presence in the signal
-    3) decrease low end boominess
- */
+void OutputSection::sendToSubgroup(int subgroupID)
+{
+    // Set output to given subgroup
+}
+
+void OutputSection::setChannelLevel(int channelID, float chFader)
+{
+    // Set level on channels' fader
+}
+
+void OutputSection::changePanning(int channelID, float chPanning)
+{
+    // Set panning on channels' panner
+}
 
 struct EQSection
 {
-    // High Shelf Frequency
     float highShelfFreq = 20000.0f;
-    // High Shelf Gain
     float highShelfGain = 0.0f;
-    // Parametric Frequency
     float ParamFreq = 1000.0f;
-    // Parametric Q
     float ParamQ = 1.0f;
-    // Parametric Gain
     float ParamGain = 0.0f;
 
-    // remove unwanted frequencies
     void removeFreq(float freqToRemove, float amountInDb);
-    // increase presence in the signal
     void addPresence(float cutOffFreq, float amountInDb);
-    // decrease low end boominess
     void decreaseBoom(float centerFreq, float bandWidth, float amountInDb);
 };
 
-/*
-Thing 9) Dynamics Section
-5 properties:
-    1) Compressor Threshold
-    2) Compressor Ratio
-    3) Compressor Attack
-    4) Compressor Release
-    5) Compressor Engage Switch
-3 things it can do:
-    1) limit signal to avoid clipping
-    2) make signal louder
-    3) tame signal transients
- */
+void EQSection::removeFreq(float freqToRemove, float amountInDb)
+{
+    // Apply freq reduction
+}
+
+void EQSection::addPresence(float cutOffFreq, float amountInDb)
+{
+    // Increase shelf at freq
+}
+
+void EQSection::decreaseBoom(float centerFreq, float bandWidth, float amountInDb)
+{
+    // Decrease peak at frequency
+}
 
 struct DynamicsSection
 {
-    // Compressor Threshold
     float compThresh = 0.0f;
-    // Compressor Ratio
     float compRatio = 2.0f;
-    // Compressor Attack
     int compAttackMs = 10.0f;
-    // Compressor Release
     int compRelMs = 200.0f;
-    // Compressor Engage Switch
     bool compEngage = false;
 
-    // limit signal to avoid clipping
     float limitSignal(float threshold, int lookaheadMs);
-    // make signal louder
     void compSignal(float compThresh, float compRatio, float makeUpGain);
-    // tame signal transients
     void tameSignalTransients(int channelID);
 };
 
-/*
-Thing 10) Mixing Console
-5 properties:
-    1) Master Section
-    2) Input Section
-    3) Output Section
-    4) EQ Section
-    5) Dynamics Section
-3 things it can do:
-    1) mix signals together
-    2) process signals individually
-    3) choose which speakers to use
- */
+float DynamicsSection::limitSignal(float threshold, int lookaheadMs)
+{
+    float newSampleLevel = 0.0f;
+
+    // Create limiter
+
+    return newSampleLevel;
+}
+
+void DynamicsSection::compSignal(float thresh, float ratio, float makeUpGain)
+{
+    // Compress signal
+}
+
+void DynamicsSection::tameSignalTransients(int channelID)
+{
+    // Fast peak reduction
+}
 
 struct MixingConsole
 {
-    // Master Section
     MasterSection MS;
-    // Input Section
     InputSection IS;
-    // Output Section
     OutputSection OS;
-    // EQ Section
     EQSection ES;
-    // Dynamics Section
     DynamicsSection DS;
 
     struct ChannelStrip
@@ -491,21 +537,54 @@ struct MixingConsole
         bool SF_toMasterBus = false;
         bool LF_toMasterBus = false;
         
-        // resets channelstrip
         bool resetChannel();
-        // copies from sf to lf or vice-versa
         bool copySettingsFromPath(std::string pathToCopy);
-        // change channel position
         void changeChannelID(int oldID, int newID);
     };
 
-    // mix signals together
     void mixAllActiveChannels();
-    // process signals individually
     void processChannel(ChannelStrip chStrp, DynamicsSection dynSec, EQSection eqSec, bool dynBeforeEq = true);
-    // choose which speakers to use
     void selectMainMonitors(int monitorID, float gainTrim = 0.0f);
 };
+
+bool MixingConsole::ChannelStrip::resetChannel()
+{
+    this->channelID = 0;
+    this->SF_Level = -80.0f;
+    this->LF_Level = -80.0f;
+    this->SF_toMasterBus = false;
+    this->LF_toMasterBus = false;
+
+    return true;
+}
+
+bool MixingConsole::ChannelStrip::copySettingsFromPath(std::string pathToCopy)
+{
+    // copy senttings from a channelto the other
+
+    return true;                        // Success simulation
+}
+
+void MixingConsole::ChannelStrip::changeChannelID(int oldID, int newID)
+{
+    // check if new id exists
+    // if it doesn't, find channel with old id and change channel id for new id
+}
+
+void MixingConsole::mixAllActiveChannels()
+{
+    // Mix all active signals together
+}
+
+void MixingConsole::processChannel(MixingConsole::ChannelStrip chStrp, DynamicsSection dynSec, EQSection eqSec, bool dynBeforeEq)
+{
+    // Apply processing to channel passed
+}
+
+void MixingConsole::selectMainMonitors(int monitorID, float gainTrim)
+{
+    // Select main speakers
+}
 
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
