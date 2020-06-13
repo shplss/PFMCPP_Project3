@@ -146,6 +146,8 @@ int Person::Foot::stepSize()
 
 void Person::run(int howFast, bool startWithLeftFoot)
 {
+    howFast = 3;
+
     if(startWithLeftFoot) 
     {
         leftFoot.stepForward();
@@ -185,6 +187,10 @@ struct RecStudio
 void RecStudio::recordAlbum(int numMusicians, int genreCode, int amountTime)
 {
     // Price Preview + Booking
+
+    numMusicians = 5;
+    genreCode = 2;
+    amountTime = 10;
 }
 
 float RecStudio::chargeSession(int hoursUsed, float discount, float extraCosts)
@@ -244,6 +250,10 @@ bool Supermarket::Product::updatePrice(float newPrice)
 
 int Supermarket::Product::stockPrediction(int salesPeriodInMonths, int salesAmount, int curStock)
 {
+    salesPeriodInMonths = 6;
+    salesAmount = 30;
+    curStock = 5;
+
     int stockNeeded = 0;
 
     // Prediction based on sales
@@ -286,6 +296,9 @@ bool Supermarket::restockProducts(Supermarket::Product prod, int restockQuantity
 
 void Supermarket::bakeBread(int breadType, int bakeQuantity)
 {
+    breadType = 4;
+    bakeQuantity = 30;
+
     // Start baking method
 }
 
@@ -304,11 +317,18 @@ struct Bakery
 
 void Bakery::bakeCake(int cakeType, int bakeQuantity)
 {
+    cakeType = 3;
+    bakeQuantity = 2;
+
     // Start baking method
 }
 
 bool Bakery::deliverBread(int clientID, int orderID, int deliveryTime)
 {
+    clientID = 40;
+    orderID = 937;
+    deliveryTime = 1230;
+
     // Start delivery method
 
     return true;                                // Success simulation
@@ -316,6 +336,8 @@ bool Bakery::deliverBread(int clientID, int orderID, int deliveryTime)
 
 float Bakery::foodWaste_Kg(int amountDays)
 {
+    amountDays = 15;
+
     float totalFoodWaste = 0.0f;
 
     // Calculate food waste
@@ -338,6 +360,9 @@ struct Bar
 
 bool Bar::serveDrink(int drinkID, int quantity)
 {
+    drinkID = 33;
+    quantity = 2;
+
     bool drinkServed = true;                    // Success simulation
 
     // check if drink is in stock, if yes serveDrink
@@ -365,6 +390,9 @@ float Bar::billClient(float productTotal, bool hasTabOpen, float taxAmount)
 
 void Bar::orderNewStock(int productID, int quantityOrder)
 {
+    productID = 564;
+    quantityOrder = 55;
+
     // Method to order products
 }
 
@@ -383,6 +411,8 @@ struct MasterSection
 
 void MasterSection::selectSpeaker(int monitorID)
 {
+    monitorID = 3;
+
     // Change main speakers
 }
 
@@ -393,6 +423,8 @@ void MasterSection::changeLevel(float gainChange)
 
 bool MasterSection::sendMasterToHP(float sendLevel)
 {
+    sendLevel = -10.0f;
+
     // Send master fader to foldback
 
     return true;                        // Success simulation
@@ -430,6 +462,8 @@ void InputSection::engageHPF(bool hpfEng)
 
 void InputSection::gainMtrRet(float gainAmount)
 {
+    gainAmount = -5.0f;
+
     // Change gain on MTR Return
 }
 
@@ -448,16 +482,24 @@ struct OutputSection
 
 void OutputSection::sendToSubgroup(int subgroupID)
 {
+    subgroupID = 5;
+
     // Set output to given subgroup
 }
 
 void OutputSection::setChannelLevel(int channelID, float chFader)
 {
+    channelID = 16;
+    chFader = -12.0f;
+
     // Set level on channels' fader
 }
 
 void OutputSection::changePanning(int channelID, float chPanning)
 {
+    channelID = 5;
+    chPanning = -0.5f;
+
     // Set panning on channels' panner
 }
 
@@ -476,16 +518,26 @@ struct EQSection
 
 void EQSection::removeFreq(float freqToRemove, float amountInDb)
 {
+    freqToRemove = 4000.0f;
+    amountInDb = 50.0f;
+
     // Apply freq reduction
 }
 
 void EQSection::addPresence(float cutOffFreq, float amountInDb)
 {
+    cutOffFreq = 10000.0f;
+    amountInDb = 3.0f;
+
     // Increase shelf at freq
 }
 
 void EQSection::decreaseBoom(float centerFreq, float bandWidth, float amountInDb)
 {
+    centerFreq = 300.0f;
+    bandWidth = 2.0f;
+    amountInDb = 6.0f;
+
     // Decrease peak at frequency
 }
 
@@ -504,6 +556,9 @@ struct DynamicsSection
 
 float DynamicsSection::limitSignal(float threshold, int lookaheadMs)
 {
+    threshold = -2.0f;
+    lookaheadMs = 6;
+
     float newSampleLevel = 0.0f;
 
     // Create limiter
@@ -513,11 +568,17 @@ float DynamicsSection::limitSignal(float threshold, int lookaheadMs)
 
 void DynamicsSection::compSignal(float thresh, float ratio, float makeUpGain)
 {
+    thresh = -6.0f;
+    ratio = 3.5f;
+    makeUpGain = 4.0f;
+
     // Compress signal
 }
 
 void DynamicsSection::tameSignalTransients(int channelID)
 {
+    channelID = 10;
+
     // Fast peak reduction
 }
 
@@ -560,6 +621,8 @@ bool MixingConsole::ChannelStrip::resetChannel()
 
 bool MixingConsole::ChannelStrip::copySettingsFromPath(std::string pathToCopy)
 {
+    pathToCopy = "SF";
+
     // copy senttings from a channelto the other
 
     return true;                        // Success simulation
@@ -567,6 +630,9 @@ bool MixingConsole::ChannelStrip::copySettingsFromPath(std::string pathToCopy)
 
 void MixingConsole::ChannelStrip::changeChannelID(int oldID, int newID)
 {
+    oldID = 12;
+    newID = 15;
+
     // check if new id exists
     // if it doesn't, find channel with old id and change channel id for new id
 }
@@ -578,11 +644,16 @@ void MixingConsole::mixAllActiveChannels()
 
 void MixingConsole::processChannel(MixingConsole::ChannelStrip chStrp, DynamicsSection dynSec, EQSection eqSec, bool dynBeforeEq)
 {
+    dynBeforeEq = true;
+
     // Apply processing to channel passed
 }
 
 void MixingConsole::selectMainMonitors(int monitorID, float gainTrim)
 {
+    monitorID = 1;
+    gainTrim = 5.0f;
+
     // Select main speakers
 }
 
