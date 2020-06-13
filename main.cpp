@@ -644,6 +644,9 @@ void MixingConsole::mixAllActiveChannels()
 
 void MixingConsole::processChannel(MixingConsole::ChannelStrip chStrp, DynamicsSection dynSec, EQSection eqSec, bool dynBeforeEq)
 {
+    chStrp.channelID = 2;
+    dynSec.compEngage = true;
+    eqSec.ParamGain = 5.0f;
     dynBeforeEq = true;
 
     // Apply processing to channel passed
