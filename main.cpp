@@ -136,12 +136,12 @@ struct Person
 
 void Person::Foot::stepForward()
 {
-    this->numOfSteps += 1;
+    numOfSteps += 1;
 }
 
 int Person::Foot::stepSize()
 {
-    return this->stepSize_cm;
+    return stepSize_cm;
 }
 
 void Person::run(int howFast, bool startWithLeftFoot)
@@ -242,10 +242,7 @@ bool Supermarket::Product::updatePrice(float newPrice)
         this->retailPrice = newPrice;
         return true;
     }
-    else
-    {
-        return false;
-    }
+    return false;
 }
 
 int Supermarket::Product::stockPrediction(int salesPeriodInMonths, int salesAmount, int curStock)
@@ -265,7 +262,7 @@ float Supermarket::Product::priceComparison(Supermarket::Product prodToCompareWi
 {
     float priceDiff = 0.0f;
 
-    priceDiff = this->retailPrice - prodToCompareWith.retailPrice;
+    priceDiff = retailPrice - prodToCompareWith.retailPrice;
 
     return priceDiff;
 }
@@ -291,7 +288,7 @@ bool Supermarket::restockProducts(Supermarket::Product prod, int restockQuantity
         return contactSuccessful;
     }
 
-    return contactSuccessful;
+    return !contactSuccessful;
 }
 
 void Supermarket::bakeBread(int breadType, int bakeQuantity)
@@ -418,7 +415,7 @@ void MasterSection::selectSpeaker(int monitorID)
 
 void MasterSection::changeLevel(float gainChange)
 {
-    this->masterFaderLevel += gainChange;
+    masterFaderLevel += gainChange;
 }
 
 bool MasterSection::sendMasterToHP(float sendLevel)
@@ -445,11 +442,11 @@ struct InputSection
 
 void InputSection::gainInput(float gainAmount)
 {
-    if(this->inputSourceID == 0)                // Would use a switch case instead
+    if(inputSourceID == 0)                // Would use a switch case instead
     {
         micGain += gainAmount;
     }
-    else if(this->inputSourceID == 1)
+    else if(inputSourceID == 1)
     {
         lineGain += gainAmount;
     }
@@ -457,7 +454,7 @@ void InputSection::gainInput(float gainAmount)
 
 void InputSection::engageHPF(bool hpfEng)
 {
-    this->hpfEngage = hpfEng;
+    hpfEngage = hpfEng;
 }
 
 void InputSection::gainMtrRet(float gainAmount)
@@ -610,11 +607,11 @@ struct MixingConsole
 
 bool MixingConsole::ChannelStrip::resetChannel()
 {
-    this->channelID = 0;
-    this->SF_Level = -80.0f;
-    this->LF_Level = -80.0f;
-    this->SF_toMasterBus = false;
-    this->LF_toMasterBus = false;
+    channelID = 0;
+    SF_Level = -80.0f;
+    LF_Level = -80.0f;
+    SF_toMasterBus = false;
+    LF_toMasterBus = false;
 
     return true;
 }
