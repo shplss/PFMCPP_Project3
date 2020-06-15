@@ -24,6 +24,7 @@
  */
 
 #include <iostream>
+#include <math.h>
 namespace Example 
 {
 struct UDT  // my user defined type named 'UDT'
@@ -64,24 +65,37 @@ int main()
 
 struct RecStudio 
 {
-    int numMicrophones = 25;
-    int numOutboardUnits = 30;
-    int sessionPerMonth = 10;
-    float multiDayDiscount = 0.20f;
-    float revenewPerMonth = 6000.0f;
+    int numMicrophones;
+    int numOutboardUnits;
+    int sessionPerMonth;
+    float multiDayDiscount;
+    float revenewPerMonth;
+
+    RecStudio();
 
     void recordAlbum(int numMusicians, int genreCode, int amountTime);
     float chargeSession(int hoursUsed, float discount, float extraCosts = 0.0f);
     void testAllEquipment();
 };
 
+RecStudio::RecStudio()
+{
+    numMicrophones = 25;
+    numOutboardUnits = 30;
+    sessionPerMonth = 10;
+    multiDayDiscount = 0.20f;
+    revenewPerMonth = 6000.0f;
+}
+
 void RecStudio::recordAlbum(int numMusicians, int genreCode, int amountTime)
 {
     // Price Preview + Booking
 
-    numMusicians = 5;
-    genreCode = 2;
-    amountTime = 10;
+    // numMusicians = 5;
+    // genreCode = 2;
+    // amountTime = 10;
+
+    std::cout << "\nAn album recording with " << numMusicians << " musicians and genre " << genreCode << " has been booked. It will cost approximately " << amountTime * 50.0f << " euros." << std::endl;
 }
 
 float RecStudio::chargeSession(int hoursUsed, float discount, float extraCosts)
@@ -102,19 +116,23 @@ void RecStudio::testAllEquipment()
 
 struct Supermarket 
 {
-    int employPerShift = 15;
-    int numActiveChashiers = 5;
-    float salesPerDay = 10000.0f;
-    float profitPerDay = 3000.0f;
-    int topSellerID = 0;
+    int employPerShift;
+    int numActiveChashiers;
+    float salesPerDay;
+    float profitPerDay;
+    int topSellerID;
+
+    Supermarket();
 
     struct Product 
     {
-        int productID = 0;
-        std::string productName = "";
-        float retailPrice = 0.0f;
-        int currentStock = 0;
-        int orderedStock = 0;
+        int productID;
+        std::string productName;
+        float retailPrice;
+        int currentStock;
+        int orderedStock;
+
+        Product();
 
         bool updatePrice(float newPrice);
         int stockPrediction(int salesPeriodInMonths, int salesAmount, int currentStock);
@@ -125,6 +143,25 @@ struct Supermarket
     bool restockProducts(Product prod, int restockQuantity);
     void bakeBread(int breadType, int bakeQuantity);
 };
+
+
+Supermarket::Supermarket()
+{
+    employPerShift = 15;
+    numActiveChashiers = 5;
+    salesPerDay = 10000.0f;
+    profitPerDay = 3000.0f;
+    topSellerID = 0;
+}
+
+Supermarket::Product::Product()
+{
+    productID = 0;
+    productName = "";
+    retailPrice = 0.0f;
+    currentStock = 0;
+    orderedStock = 0;
+}
 
 bool Supermarket::Product::updatePrice(float newPrice)
 {
@@ -184,31 +221,46 @@ bool Supermarket::restockProducts(Supermarket::Product prod, int restockQuantity
 
 void Supermarket::bakeBread(int breadType, int bakeQuantity)
 {
-    breadType = 4;
-    bakeQuantity = 30;
+    // breadType = 4;
+    // bakeQuantity = 30;
 
     // Start baking method
+
+    std::cout << "\n" << bakeQuantity << " units of bread type " << breadType << " have been added to the queue." << std::endl;
 }
 
 struct Bakery
 {
-    int numBagsFlour = 20;
-    int XBread_Amount = 40;
-    int XCake_Amount = 5;
-    float daySales = 5000.0f;
-    int XClient_totalProdDeliver = 5;
+    int numBagsFlour;
+    int XBread_Amount;
+    int XCake_Amount;
+    float daySales;
+    int XClient_totalProdDeliver;
+
+    Bakery();
 
     void bakeCake(int cakeType, int bakeQuantity);
     bool deliverBread(int clientID, int orderID, int deliveryTime);
     float foodWaste_Kg(int amountDays);
 };
 
+Bakery::Bakery()
+{
+    numBagsFlour = 20;
+    XBread_Amount = 40;
+    XCake_Amount = 5;
+    daySales = 5000.0f;
+    XClient_totalProdDeliver = 5;
+}
+
 void Bakery::bakeCake(int cakeType, int bakeQuantity)
 {
-    cakeType = 3;
-    bakeQuantity = 2;
+    // cakeType = 3;
+    // bakeQuantity = 2;
 
     // Start baking method
+
+    std::cout << "\n" << bakeQuantity << " cakes of type " << cakeType << " have been added to the baking queue." << std::endl;
 }
 
 bool Bakery::deliverBread(int clientID, int orderID, int deliveryTime)
@@ -235,16 +287,27 @@ float Bakery::foodWaste_Kg(int amountDays)
 
 struct Bar 
 {
-    int XCategory_numProdStock = 200;
-    int XCategory_numProdOrder = 50;
-    float dayProfit = 4000.0f;
-    int prodSoldPerDay = 150;
-    int numDailySpecials = 3;
+    int XCategory_numProdStock;
+    int XCategory_numProdOrder;
+    float dayProfit;
+    int prodSoldPerDay;
+    int numDailySpecials;
+
+    Bar();
 
     bool serveDrink(int drinkID, int quantity = 1);
     float billClient(float productTotal, bool hasTabOpen = false, float taxAmount = 0.09f);
     void orderNewStock(int productID, int quantityOrder);
 };
+
+Bar::Bar()
+{
+    XCategory_numProdStock = 200;
+    XCategory_numProdOrder = 50;
+    dayProfit = 4000.0f;
+    prodSoldPerDay = 150;
+    numDailySpecials = 3;
+}
 
 bool Bar::serveDrink(int drinkID, int quantity)
 {
@@ -286,16 +349,27 @@ void Bar::orderNewStock(int productID, int quantityOrder)
 
 struct MasterSection
 {
-    float masterFaderLevel = 0.0f;
-    float monitorLevel = -20.0f;
-    int monitorSelID = 0;
-    float foldbackLevel = -10.0f;
-    bool busCompressor = false;
+    float masterFaderLevel;
+    float monitorLevel;
+    int monitorSelID;
+    float foldbackLevel;
+    bool busCompressor;
+
+    MasterSection();
 
     void selectSpeaker(int monitorSelID);
     void changeLevel(float gainChange);
     bool sendMasterToHP(float sendLevel = -20.0f);
 };
+
+MasterSection::MasterSection()
+{
+    masterFaderLevel = 0.0f;
+    monitorLevel = -20.0f;
+    monitorSelID = 0;
+    foldbackLevel = -10.0f;
+    busCompressor = false;
+}
 
 void MasterSection::selectSpeaker(int monitorID)
 {
@@ -320,16 +394,27 @@ bool MasterSection::sendMasterToHP(float sendLevel)
 
 struct InputSection
 {
-    float micGain = -80.0f;
-    float lineGain = 0.0f;
-    int inputSourceID = 0;
-    bool meterFlip = false;
-    bool hpfEngage = false;
+    float micGain;
+    float lineGain;
+    int inputSourceID;
+    bool meterFlip;
+    bool hpfEngage;
+
+    InputSection();
 
     void gainInput(float gainAmount);
     void engageHPF(bool hpfEngage);
     void gainMtrRet(float gainAmount);
 };
+
+InputSection::InputSection()
+{
+    micGain = -80.0f;
+    lineGain = 0.0f;
+    inputSourceID = 0;
+    meterFlip = false;
+    hpfEngage = false;
+}
 
 void InputSection::gainInput(float gainAmount)
 {
@@ -357,16 +442,27 @@ void InputSection::gainMtrRet(float gainAmount)
 
 struct OutputSection
 {
-    int outputChannel = 0;
-    bool addToMix = false;
-    float channelFader = -80.0f;
-    float channelPanning = 0.0f;
-    bool meterFlip = false;
+    int outputChannel;
+    bool addToMix;
+    float channelFader;
+    float channelPanning;
+    bool meterFlip;
+
+    OutputSection();
 
     void sendToSubgroup(int subgroupID);
     void setChannelLevel(int channelID, float channelFader);
     void changePanning(int channelID, float channelPanning);
 };
+
+OutputSection::OutputSection()
+{
+    outputChannel = 0;
+    addToMix = false;
+    channelFader = -80.0f;
+    channelPanning = 0.0f;
+    meterFlip = false;
+}
 
 void OutputSection::sendToSubgroup(int subgroupID)
 {
@@ -393,16 +489,27 @@ void OutputSection::changePanning(int channelID, float chPanning)
 
 struct EQSection
 {
-    float highShelfFreq = 20000.0f;
-    float highShelfGain = 0.0f;
-    float ParamFreq = 1000.0f;
-    float ParamQ = 1.0f;
-    float ParamGain = 0.0f;
+    float highShelfFreq;
+    float highShelfGain;
+    float ParamFreq;
+    float ParamQ;
+    float ParamGain;
+
+    EQSection();
 
     void removeFreq(float freqToRemove, float amountInDb);
     void addPresence(float cutOffFreq, float amountInDb);
     void decreaseBoom(float centerFreq, float bandWidth, float amountInDb);
 };
+
+EQSection::EQSection()
+{
+    highShelfFreq = 20000.0f;
+    highShelfGain = 0.0f;
+    ParamFreq = 1000.0f;
+    ParamQ = 1.0f;
+    ParamGain = 0.0f;
+}
 
 void EQSection::removeFreq(float freqToRemove, float amountInDb)
 {
@@ -431,16 +538,27 @@ void EQSection::decreaseBoom(float centerFreq, float bandWidth, float amountInDb
 
 struct DynamicsSection
 {
-    float compThresh = 0.0f;
-    float compRatio = 2.0f;
-    int compAttackMs = 10.0f;
-    int compRelMs = 200.0f;
-    bool compEngage = false;
+    float compThresh;
+    float compRatio;
+    int compAttackMs;
+    int compRelMs;
+    bool compEngage;
+
+    DynamicsSection();
 
     float limitSignal(float threshold, int lookaheadMs);
     void compSignal(float compThresh, float compRatio, float makeUpGain);
     void tameSignalTransients(int channelID);
 };
+
+DynamicsSection::DynamicsSection()
+{
+    compThresh = 0.0f;
+    compRatio = 2.0f;
+    compAttackMs = 10.0f;
+    compRelMs = 200.0f;
+    compEngage = false;
+}
 
 float DynamicsSection::limitSignal(float threshold, int lookaheadMs)
 {
@@ -478,13 +596,17 @@ struct MixingConsole
     EQSection ES;
     DynamicsSection DS;
 
+    MixingConsole();
+
     struct ChannelStrip
     {
-        int channelID = 0;
-        float SF_Level = -80.0f;
-        float LF_Level = -80.0f;
-        bool SF_toMasterBus = false;
-        bool LF_toMasterBus = false;
+        int channelID;
+        float SF_Level;
+        float LF_Level;
+        bool SF_toMasterBus;
+        bool LF_toMasterBus;
+
+        ChannelStrip();
         
         bool resetChannel();
         bool copySettingsFromPath(std::string pathToCopy);
@@ -495,6 +617,20 @@ struct MixingConsole
     void processChannel(ChannelStrip chStrp, DynamicsSection dynSec, EQSection eqSec, bool dynBeforeEq = true);
     void selectMainMonitors(int monitorID, float gainTrim = 0.0f);
 };
+
+MixingConsole::MixingConsole()
+{
+    // Custom type initialization
+}
+
+MixingConsole::ChannelStrip::ChannelStrip()
+{
+    channelID = 0;
+    SF_Level = -80.0f;
+    LF_Level = -80.0f;
+    SF_toMasterBus = false;
+    LF_toMasterBus = false;
+}
 
 bool MixingConsole::ChannelStrip::resetChannel()
 {
@@ -566,5 +702,51 @@ void MixingConsole::selectMainMonitors(int monitorID, float gainTrim)
 int main()
 {
     Example::main();
+
+    RecStudio recStudio;
+    recStudio.recordAlbum(5, 2, 10);
+
+    std::cout << "\nAmount to charge to the studio client is: " << recStudio.chargeSession(20, 0.1f,50.5f) << " euros." << std::endl;
+
+    Supermarket superMarket;
+    superMarket.bakeBread(3, 30);
+
+    std::cout << "\nAmount to charge to the supermarket client is: " << superMarket.chargeClient(25.6f) << " euros." << std::endl;
+
+    Supermarket::Product prod1;
+    Supermarket::Product prod2;
+
+    prod1.productID = 1;
+    prod1.productName = "Bananas";
+    prod1.retailPrice = 1.95f;
+    prod1.currentStock = 40;
+    prod1.orderedStock = 20;
+
+    Bakery bakery;
+    bakery.bakeCake(1, 4);
+
+    Bar bar1;
+    Bar bar2;
+
+    std::cout << "\nAmount to charge to the bar client is: " << bar1.billClient(30.5f) << " euros." << std::endl;
+
+    std::cout << "\nThe bar sells, in average, " << bar2.prodSoldPerDay << " products a day with a profit of " << bar2.dayProfit << " euros." << std::endl;
+
+    MasterSection masterSection;
+
+    InputSection inputSection;
+
+    OutputSection outputSection;
+
+    EQSection eqSection;
+
+    DynamicsSection dynSection;
+
+    MixingConsole mixConsole;
+
+    MixingConsole::ChannelStrip chStrip;
+
+    std::cout << "" << std::endl;
+
     std::cout << "good to go!" << std::endl;
 }
