@@ -13,6 +13,8 @@
  */
 
 #include <iostream>
+#include <math.h>
+
 namespace Example 
 {
 struct UDT  
@@ -48,21 +50,16 @@ struct RecStudio
     float multiDayDiscount;
     float revenewPerMonth;
 
-    RecStudio();
+    RecStudio() : numMicrophones(25),
+                  numOutboardUnits(30),
+                  sessionPerMonth(10),
+                  multiDayDiscount(0.2f),
+                  revenewPerMonth(6000.0f) {}
 
     void recordAlbum(int numMusicians, int genreCode, int amountTime);
     float chargeSession(int hoursUsed, float discount, float extraCosts = 0.0f);
     void testAllEquipment();
 };
-
-RecStudio::RecStudio()
-{
-    numMicrophones = 25;
-    numOutboardUnits = 30;
-    sessionPerMonth = 10;
-    multiDayDiscount = 0.20f;
-    revenewPerMonth = 6000.0f;
-}
 
 void RecStudio::recordAlbum(int numMusicians, int genreCode, int amountTime)
 {
@@ -89,17 +86,19 @@ float RecStudio::chargeSession(int hoursUsed, float discount, float extraCosts)
 void RecStudio::testAllEquipment()
 {
     // Check all equipment available + test procedure
+
+    std::cout << "\n" << numMicrophones << " microphones to be tested. " << numOutboardUnits << " outboard units to be tested." << std::endl;
 }
 
 struct Supermarket 
 {
-    int employPerShift;
-    int numActiveChashiers;
-    float salesPerDay;
-    float profitPerDay;
-    int topSellerID;
+    int employPerShift { 15 };
+    int numActiveChashiers { 5 };
+    float salesPerDay { 10000.0f };
+    float profitPerDay { 3000.0f };
+    int topSellerID { 0 };
 
-    Supermarket();
+    Supermarket() {}
 
     struct Product 
     {
@@ -120,16 +119,6 @@ struct Supermarket
     bool restockProducts(Product prod, int restockQuantity);
     void bakeBread(int breadType, int bakeQuantity);
 };
-
-
-Supermarket::Supermarket()
-{
-    employPerShift = 15;
-    numActiveChashiers = 5;
-    salesPerDay = 10000.0f;
-    profitPerDay = 3000.0f;
-    topSellerID = 0;
-}
 
 Supermarket::Product::Product()
 {
@@ -214,21 +203,16 @@ struct Bakery
     float daySales;
     int XClient_totalProdDeliver;
 
-    Bakery();
+    Bakery() : numBagsFlour(20),
+               XBread_Amount(40),
+               XCake_Amount(5),
+               daySales(5000.0f),
+               XClient_totalProdDeliver(5) {}
 
     void bakeCake(int cakeType, int bakeQuantity);
     bool deliverBread(int clientID, int orderID, int deliveryTime);
     float foodWaste_Kg(int amountDays);
 };
-
-Bakery::Bakery()
-{
-    numBagsFlour = 20;
-    XBread_Amount = 40;
-    XCake_Amount = 5;
-    daySales = 5000.0f;
-    XClient_totalProdDeliver = 5;
-}
 
 void Bakery::bakeCake(int cakeType, int bakeQuantity)
 {
@@ -237,16 +221,18 @@ void Bakery::bakeCake(int cakeType, int bakeQuantity)
 
     // Start baking method
 
-    std::cout << "\n" << bakeQuantity << " cakes of type " << cakeType << " have been added to the baking queue." << std::endl;
+    std::cout << "\n" << bakeQuantity << " cakes of type " << cakeType << " have been added to the baking queue. There are " << numBagsFlour << " bags of flour left." << std::endl;
 }
 
 bool Bakery::deliverBread(int clientID, int orderID, int deliveryTime)
 {
-    clientID = 40;
-    orderID = 937;
-    deliveryTime = 1230;
+    // clientID = 40;
+    // orderID = 937;
+    // deliveryTime = 1230;
 
     // Start delivery method
+
+    std::cout << "\nFor client (ID) " << clientID << " and order (ID) " << orderID << " there are " << XClient_totalProdDeliver << " products to be delivered at " << deliveryTime << "." << std::endl;
 
     return true;                                // Success simulation
 }
@@ -264,27 +250,18 @@ float Bakery::foodWaste_Kg(int amountDays)
 
 struct Bar 
 {
-    int XCategory_numProdStock;
-    int XCategory_numProdOrder;
-    float dayProfit;
-    int prodSoldPerDay;
-    int numDailySpecials;
+    int XCategory_numProdStock { 200 };
+    int XCategory_numProdOrder { 50 };
+    float dayProfit { 4000.0f };
+    int prodSoldPerDay { 150 };
+    int numDailySpecials { 3 };
 
-    Bar();
+    Bar() {}
 
     bool serveDrink(int drinkID, int quantity = 1);
     float billClient(float productTotal, bool hasTabOpen = false, float taxAmount = 0.09f);
     void orderNewStock(int productID, int quantityOrder);
 };
-
-Bar::Bar()
-{
-    XCategory_numProdStock = 200;
-    XCategory_numProdOrder = 50;
-    dayProfit = 4000.0f;
-    prodSoldPerDay = 150;
-    numDailySpecials = 3;
-}
 
 bool Bar::serveDrink(int drinkID, int quantity)
 {
@@ -682,6 +659,7 @@ int main()
 
     RecStudio recStudio;
     recStudio.recordAlbum(5, 2, 10);
+    recStudio.testAllEquipment();
 
     std::cout << "\nAmount to charge to the studio client is: " << recStudio.chargeSession(20, 0.1f,50.5f) << " euros." << std::endl;
 
@@ -701,6 +679,7 @@ int main()
 
     Bakery bakery;
     bakery.bakeCake(1, 4);
+    bakery.deliverBread(50, 724, 1345);
 
     Bar bar1;
     Bar bar2;
