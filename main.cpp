@@ -87,6 +87,8 @@ struct RecStudio
     void recordAlbum(int numMusicians, int genreCode, int amountTime);
     float chargeSession(int hoursUsed, float discount, float extraCosts = 0.0f);
     void testAllEquipment();
+
+    float yearlyRevenew(float monthRevenew, int periodInMonths);
 };
 
 void RecStudio::recordAlbum(int numMusicians, int genreCode, int amountTime)
@@ -112,6 +114,20 @@ void RecStudio::testAllEquipment()
     // Check all equipment available + test procedure
 
     std::cout << "\n" << numMicrophones << " microphones to be tested. " << numOutboardUnits << " outboard units to be tested." << std::endl;
+}
+
+float RecStudio::yearlyRevenew(float monthRevenew, int periodInMonths)
+{
+    int months = 0;
+    float totalRevenew = 0.0f;
+    
+    while(months < periodInMonths)
+    {
+        totalRevenew += monthRevenew;
+        ++months;
+    }
+
+    return totalRevenew;
 }
 
 struct Supermarket 
@@ -142,6 +158,8 @@ struct Supermarket
     float chargeClient(float productTotal, float taxAmount = 0.21f, float discount = 0);
     bool restockProducts(Product prod, int restockQuantity);
     void bakeBread(int breadType, int bakeQuantity);
+
+    void checkCashiers(int cashierAmount);
 };
 
 Supermarket::Product::Product()
@@ -152,10 +170,10 @@ Supermarket::Product::Product()
     currentStock = 0;
     orderedStock = 0;
 }
-
+#include <math.h>
 bool Supermarket::Product::updatePrice(float newPrice)
 {
-    if(fabs(this->retailPrice - newPrice) < 0.005f)
+    if(std::fabs(this->retailPrice - newPrice) < 0.005f)
     {
         this->retailPrice = newPrice;
         return true;
@@ -217,6 +235,16 @@ void Supermarket::bakeBread(int breadType, int bakeQuantity)
     std::cout << "\n" << bakeQuantity << " units of bread type " << breadType << " have been added to the queue." << std::endl;
 }
 
+void Supermarket::checkCashiers(int cashierAmount)
+{
+    for(int i = 0; i < cashierAmount; ++i)
+    {
+        // Prints name of cashier
+
+        std::cout << "\n" << i + 1 << " - Cashier Name: Placeholder" << std::endl;
+    }
+}
+
 struct Bakery
 {
     int numBagsFlour;
@@ -231,9 +259,19 @@ struct Bakery
                daySales(5000.0f),
                XClient_totalProdDeliver(5) {}
 
+    struct Bread 
+    {
+        std::string name = ""; 
+        int units = 0;
+
+        Bread(std::string n, int u) : name(n), units(u) { } 
+    };  
+
     void bakeCake(int cakeType, int bakeQuantity);
     bool deliverBread(int clientID, int orderID, int deliveryTime);
     float foodWaste_Kg(int amountDays);
+
+    Bread makeBread(std::string breadName, int amountBake);
 };
 
 void Bakery::bakeCake(int cakeType, int bakeQuantity)
@@ -262,6 +300,38 @@ float Bakery::foodWaste_Kg(int amountDays)
 
     return totalFoodWaste;
 }
+
+Bakery::Bread Bakery::makeBread(std::string breadName, int amountBake)
+{
+    Bakery::Bread bread(breadName, 0);
+
+    while(bread.units < amountBake)
+    {
+        bread.units += 1;
+
+        if(bread.units >= amountBake)
+        {
+            return bread;
+        }
+    }
+
+    return Bread {breadName, 0};
+}
+
+/*
+
+Bar bar(startingVal);                //4a)
+        while( bar.num < threshold )         //4a) 
+        { 
+            bar.num += 1;                    //4a)
+            
+            if( bar.num >= threshold )       //4b)
+                return bar;
+        }
+        
+        return Bar {-1};
+
+*/
 
 struct Bar 
 {
@@ -374,6 +444,8 @@ struct InputSection
     void gainInput(float gainAmount);
     void engageHPF(bool hpfEngage);
     void gainMtrRet(float gainAmount);
+
+    std::string fadeInMic(float currentGain, float targetGain);
 };
 
 InputSection::InputSection()
@@ -407,6 +479,21 @@ void InputSection::gainMtrRet(float gainAmount)
     gainAmount = -5.0f;
 
     // Change gain on MTR Return
+}
+
+std::string InputSection::fadeInMic(float currentGain, float targetGain)
+{
+    while(currentGain < targetGain)
+    {
+        currentGain += 1.0f;
+
+        if(currentGain >= targetGain)
+        {
+            micGain = currentGain;
+            return "Target Gain achieved.";
+        }
+    }
+    return "Current Gain higher than Target.";
 }
 
 struct OutputSection
@@ -677,11 +764,13 @@ int main()
     recStudio.testAllEquipment();
 
     std::cout << "\nAmount to charge to the studio client is: " << recStudio.chargeSession(20, 0.1f,50.5f) << " euros." << std::endl;
+    std::cout << "\nRevenew amount for the year is: " << recStudio.yearlyRevenew(recStudio.revenewPerMonth, 12) << " euros." << std::endl;
 
     Supermarket superMarket;
     superMarket.bakeBread(3, 30);
 
     std::cout << "\nAmount to charge to the supermarket client is: " << superMarket.chargeClient(25.6f) << " euros." << std::endl;
+    superMarket.checkCashiers(superMarket.numActiveChashiers);
 
     Supermarket::Product prod1;
     Supermarket::Product prod2;
@@ -696,6 +785,9 @@ int main()
     bakery.bakeCake(1, 4);
     bakery.deliverBread(50, 724, 1345);
 
+    auto bread = bakery.makeBread("White Bread", 40);
+    std::cout << "\n" << bread.units << " units of " << bread.name << " have just been baked." << std::endl;
+
     Bar bar1;
     Bar bar2;
 
@@ -706,6 +798,8 @@ int main()
     MasterSection masterSection;
 
     InputSection inputSection;
+    std::cout << "\nFading in Mic Input ... " << inputSection.fadeInMic(inputSection.micGain, -1.0f) << std::endl;
+    std::cout << "\nFading in Mic Input ... " << inputSection.fadeInMic(inputSection.micGain, -10.0f) << std::endl;
 
     OutputSection outputSection;
 
