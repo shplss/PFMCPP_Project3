@@ -65,10 +65,6 @@ void RecStudio::recordAlbum(int numMusicians, int genreCode, int amountTime)
 {
     // Price Preview + Booking
 
-    // numMusicians = 5;
-    // genreCode = 2;
-    // amountTime = 10;
-
     std::cout << "\nAn album recording with " << numMusicians << " musicians and genre " << genreCode << " has been booked. It will cost approximately " << amountTime * 50.0f << " euros." << std::endl;
 }
 
@@ -174,6 +170,7 @@ float Supermarket::chargeClient(float productTotal, float taxAmount, float disco
 bool Supermarket::restockProducts(Supermarket::Product prod, int restockQuantity)
 {
     // Method to contact supplier
+
     bool contactSuccessful = true;              // Success simulation
 
     if(contactSuccessful)
@@ -187,9 +184,6 @@ bool Supermarket::restockProducts(Supermarket::Product prod, int restockQuantity
 
 void Supermarket::bakeBread(int breadType, int bakeQuantity)
 {
-    // breadType = 4;
-    // bakeQuantity = 30;
-
     // Start baking method
 
     std::cout << "\n" << bakeQuantity << " units of bread type " << breadType << " have been added to the queue." << std::endl;
@@ -216,9 +210,6 @@ struct Bakery
 
 void Bakery::bakeCake(int cakeType, int bakeQuantity)
 {
-    // cakeType = 3;
-    // bakeQuantity = 2;
-
     // Start baking method
 
     std::cout << "\n" << bakeQuantity << " cakes of type " << cakeType << " have been added to the baking queue. There are " << numBagsFlour << " bags of flour left." << std::endl;
@@ -226,10 +217,6 @@ void Bakery::bakeCake(int cakeType, int bakeQuantity)
 
 bool Bakery::deliverBread(int clientID, int orderID, int deliveryTime)
 {
-    // clientID = 40;
-    // orderID = 937;
-    // deliveryTime = 1230;
-
     // Start delivery method
 
     std::cout << "\nFor client (ID) " << clientID << " and order (ID) " << orderID << " there are " << XClient_totalProdDeliver << " products to be delivered at " << deliveryTime << "." << std::endl;
