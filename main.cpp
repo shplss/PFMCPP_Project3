@@ -318,21 +318,6 @@ Bakery::Bread Bakery::makeBread(std::string breadName, int amountBake)
     return Bread {breadName, 0};
 }
 
-/*
-
-Bar bar(startingVal);                //4a)
-        while( bar.num < threshold )         //4a) 
-        { 
-            bar.num += 1;                    //4a)
-            
-            if( bar.num >= threshold )       //4b)
-                return bar;
-        }
-        
-        return Bar {-1};
-
-*/
-
 struct Bar 
 {
     int XCategory_numProdStock { 200 };
